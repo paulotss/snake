@@ -15,6 +15,27 @@ body {
     background-color: #000;
 }
 
+#bfile {
+    padding:20px;
+    width: 120px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    color:#00E731;
+    background-color: #000000;
+    border: 1px solid #00E731 ;
+    margin-bottom:10px;
+    cursor: pointer;
+    align-self: center;
+    margin: auto;
+    border-radius: 10px;
+}
+
+#bg-image {
+    align-self: flex-end;
+    display: none;
+}
+
 #screen {
     width: 600px;
     height: 600px;
@@ -22,6 +43,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     box-shadow: 10px 10px 10px grey;
+    background-size: cover;
+    background-position: center;
 }
 
 #logo {
