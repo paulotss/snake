@@ -1,13 +1,6 @@
 'use strict';
 
 $(document).ready(function() {
-    var screen = $("#screen");
-    var style = "width:20px; height:20px; background-color:#000000";
-    for(let x = 1; x <= 30; x++) {
-        for(let y = 1; y <= 30; y++) {
-            screen.append("<div id='s"+ "x" + x + "y" + y +"' style='"+ style +"'></div>");
-        }
-    }
 
     const snake = {
         'y' : 14,
@@ -15,12 +8,12 @@ $(document).ready(function() {
         'control' : 0,
         'lastKey' : 39,
         'pause' : false,
-        'speed': "fast",
+        'speed': 'fast',
         'body' : [], //This array will be the body. With this we can get head e tail
-        'food' : "",
+        'food' : '',
         'area' : [],
         'setFood' : function() {
-            let adr = "";
+            let adr = '';
             let vrf = false;
             for(let x = 1; x <= 30; x++) {
                 for(let y = 1; y <= 30; y++) {
@@ -130,6 +123,27 @@ $(document).ready(function() {
             
         }
     }
+
+    function changeContainerHeight(height) {
+        let container = $('#container');
+        container.css('height', `${height}px`);
+    }
+    
+    changeContainerHeight(window.innerHeight);
+
+    function addPixels(dimension) {
+        let screen = document.getElementById('screen');
+        for(let x = 1; x <= dimension; x++) {
+            for(let y = 1; y <= dimension; y++) {
+                let pixel = document.createElement('div');
+                pixel.classList.add('pixel');
+                pixel.setAttribute('id', `sx${x}y${y}`);
+                screen.appendChild(pixel);
+            }
+        }
+    }
+
+    addPixels(30);
 
     $("#start").click(function() {
         if($(this).text() === "START") {

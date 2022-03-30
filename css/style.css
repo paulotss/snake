@@ -1,11 +1,18 @@
 body {
     background-color: #5A5A5A;
+    margin: 0;
 }
 #container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
+}
+
+.pixel {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
 }
 
 #screen {
