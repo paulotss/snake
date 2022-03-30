@@ -173,8 +173,8 @@ $(document).ready(function() {
     });
 
     document.getElementById('bg-image').addEventListener('change', function(e) {
-        let image = URL.createObjectURL(e.target.files[0]);
         if(e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/png') {
+            let image = URL.createObjectURL(e.target.files[0]);
             $('#screen').css('background-image', `url(${image})`);
         } else {
             alert('Somente imagens!');
