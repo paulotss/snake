@@ -1,8 +1,11 @@
 'use strict';
 
 $(document).ready(function() {
-    var screen = $("#screen");
-    var style = "width:20px; height:20px; background-color:#000000";
+    let container = $("#container");
+    container.css('height', window.innerHeight + 'px');
+
+    let screen = $("#screen");
+    let style = "width:20px; height:20px; background-color:#000000";
     for(let x = 1; x <= 30; x++) {
         for(let y = 1; y <= 30; y++) {
             screen.append("<div id='s"+ "x" + x + "y" + y +"' style='"+ style +"'></div>");
