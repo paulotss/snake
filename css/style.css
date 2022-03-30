@@ -9,6 +9,12 @@ body {
     margin: auto;
 }
 
+.pixel {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+}
+
 #screen {
     width: 600px;
     height: 600px;
