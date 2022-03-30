@@ -133,6 +133,7 @@ $(document).ready(function() {
 
     function addPixels(dimension) {
         let screen = document.getElementById('screen');
+        screen.innerHTML = '';
         for(let x = 1; x <= dimension; x++) {
             for(let y = 1; y <= dimension; y++) {
                 let pixel = document.createElement('div');
@@ -143,10 +144,9 @@ $(document).ready(function() {
         }
     }
 
-    addPixels(30);
-
     $("#start").click(function() {
         if($(this).text() === "START") {
+            addPixels(30);
             snake.const();
             snake.setFood();
             snake.check();
@@ -171,6 +171,14 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         snake.control = e.keyCode;
     });
-        
+
+    document.getElementById('bg-image').addEventListener('change', function(e) {
+        if(e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/png') {
+            let image = URL.createObjectURL(e.target.files[0]);
+            $('#screen').css('background-image', `url(${image})`);
+        } else {
+            alert('Somente imagens!');
+        }
+    }); 
 
 });
