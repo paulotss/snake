@@ -173,7 +173,7 @@ $(document).ready(function() {
     });
 
     document.getElementById('bg-image').addEventListener('change', function(e) {
-        if(e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/png') {
+        if(e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/gif') {
             let image = URL.createObjectURL(e.target.files[0]);
             $('#screen').css('background-image', `url(${image})`);
         } else {
