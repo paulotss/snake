@@ -10,7 +10,7 @@ $(document).ready(function() {
         'control' : 0,
         'lastKey' : 39,
         'pause' : false,
-        'speed': 'fast',
+        'speed': 100,
         'body' : [], //This array will be the body. With this we can get head e tail
         'food' : '',
         setFood () {
@@ -23,35 +23,32 @@ $(document).ready(function() {
             this.food = adr;
             $(this.food).css({'opacity' : "0.1"});
         },
-        'moveDefault' : function() {
+        moveDefault() {
             switch(this.lastKey) {
                 case 38 : snake.x--; break; //top
                 case 40 : snake.x++; break; //down
                 case 37 : snake.y--; break; //left
                 case 39 : snake.y++; break; //right
             }
-
         },
-        'const' : function() {
+        init() {
             this.body.push("#s" + "x" + this.x.toString() + "y" + (this.y - 2).toString());
             this.body.push("#s" + "x" + this.x.toString() + "y" + (this.y - 1).toString());
             this.body.push("#s" + "x" + this.x.toString() + "y" + this.y.toString());  
 
-            this.body.forEach(function(value) {
+            this.body.forEach((value) => {
                 $(value).css({'opacity' : "0.1"})
             });
-
-
         },
-        'check' : function() {
+        check() {
             switch(snake.control) {
                 case 38 : 
                     if(snake.x > 1 && snake.lastKey != 40) { 
                         snake.x--; 
                         snake.lastKey = snake.control;
                         snake.move()
-                    } else if(snake.x > 1) {
-                        snake.moveDefault();
+                    } else if(snake.x < 30 && snake.lastKey != 38) {
+                        snake.x++; 
                         snake.move()
                     } break; //top
                 case 40 : 
@@ -59,8 +56,8 @@ $(document).ready(function() {
                         snake.x++; 
                         snake.lastKey = snake.control;
                         snake.move()
-                    } else if(snake.x < 30) {
-                        snake.moveDefault();
+                    } else if(snake.x > 1 && snake.lastKey != 40) {
+                        snake.x--; 
                         snake.move()
                     } break; //down
                 case 37 : 
@@ -68,8 +65,8 @@ $(document).ready(function() {
                         snake.y--; 
                         snake.lastKey = snake.control;
                         snake.move()
-                    } else if(snake.y > 1) {
-                        snake.moveDefault();
+                    } else if(snake.y < 30 && snake.lastKey != 37) {
+                        snake.y++;
                         snake.move()
                     } break; //left
                 case 39 : 
@@ -77,8 +74,8 @@ $(document).ready(function() {
                         snake.y++; 
                         snake.lastKey = snake.control;
                         snake.move()
-                    } else if(snake.y < 30) {
-                        snake.moveDefault();
+                    } else if(snake.y > 1 && snake.lastKey != 39) {
+                        snake.y--; 
                         snake.move()
                     } break; //right
                 default : 
@@ -87,27 +84,21 @@ $(document).ready(function() {
                         snake.move()
                     };
             }
-                    
         },
-        'move' : function() {
-            let vrf = snake.body.includes("#s" + "x" + snake.x.toString() + "y" + snake.y.toString());
+        move() {
+            let next = `#sx${snake.x}y${snake.y}`;
 
-            if(!vrf && !snake.pause) {
-                snake.body.push("#s" + "x" + snake.x.toString() + "y" + snake.y.toString());
-                $(snake.body[snake.body.length - 1]).css({'opacity' : "0.1"});
+            if(!snake.pause) {
+                snake.body.push(next);
+                $(next).css({'opacity' : "0.1"});
 
-                if(snake.body[snake.body.length - 1] === this.food) {
-                    $(this.food).css({'opacity' : '0.1'});
-                    $(this.food).animate({opacity : '0.1'}, snake.speed, function() {
-                        snake.setFood();
-                        snake.check();
-                    });
+                if(next === this.food) {
+                    snake.setFood();
+                    snake.check();
                 } else {
-                    $(snake.body[0]).animate({opacity : '1'},snake.speed, function() {
-
+                    $(snake.body[0]).animate({opacity : '1'},snake.speed, () => {
                         $(snake.body[0]).css({'opacity' : "1"});
                         snake.body.shift();
-        
                         snake.check();
                     });
                 }
@@ -139,7 +130,7 @@ $(document).ready(function() {
     $("#start").click(function() {
         if($(this).text() === "START") {
             addPixels(30);
-            snake.const();
+            snake.init();
             snake.setFood();
             snake.check();
             $(this).text("PAUSE");
