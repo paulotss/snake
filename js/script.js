@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 
+    const randomArea = () => Math.floor(Math.random() * 30) + 1;
+
     const snake = {
         'y' : 14,
         'x' : 14,
@@ -11,25 +13,15 @@ $(document).ready(function() {
         'speed': 'fast',
         'body' : [], //This array will be the body. With this we can get head e tail
         'food' : '',
-        'area' : [],
-        'setFood' : function() {
+        setFood () {
             let adr = '';
-            let vrf = false;
-            for(let x = 1; x <= 30; x++) {
-                for(let y = 1; y <= 30; y++) {
-                    adr = "#s" + x + y;
-                    vrf = this.body.includes(adr);
-                    if(!vrf) {
-                        this.area.push("#s"+ "x" + x + "y" + y);
-                        vrf = false;
-                    }
-                }
+            let vrf = true;
+            while(vrf) {
+                adr = `#sx${randomArea()}y${randomArea()}`;
+                vrf = this.body.some((val) => val === adr);
             }
-
-            let pos = Math.floor(Math.random() * (this.area.length - 1)) + 1;
-            this.food = this.area[pos];
+            this.food = adr;
             $(this.food).css({'opacity' : "0.1"});
-            //console.log(this.area);
         },
         'moveDefault' : function() {
             switch(this.lastKey) {
