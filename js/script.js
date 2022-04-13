@@ -32,16 +32,14 @@ $(document).ready(function() {
             }
 
         },
-        'const' : function() {
+        init() {
             this.body.push("#s" + "x" + this.x.toString() + "y" + (this.y - 2).toString());
             this.body.push("#s" + "x" + this.x.toString() + "y" + (this.y - 1).toString());
             this.body.push("#s" + "x" + this.x.toString() + "y" + this.y.toString());  
 
-            this.body.forEach(function(value) {
+            this.body.forEach((value) => {
                 $(value).css({'opacity' : "0.1"})
             });
-
-
         },
         'check' : function() {
             switch(snake.control) {
@@ -139,7 +137,7 @@ $(document).ready(function() {
     $("#start").click(function() {
         if($(this).text() === "START") {
             addPixels(30);
-            snake.const();
+            snake.init();
             snake.setFood();
             snake.check();
             $(this).text("PAUSE");
