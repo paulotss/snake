@@ -10,7 +10,7 @@ $(document).ready(function() {
         'control' : 0,
         'lastKey' : 39,
         'pause' : false,
-        'speed': 'fast',
+        'speed': 100,
         'body' : [], //This array will be the body. With this we can get head e tail
         'food' : '',
         setFood () {
