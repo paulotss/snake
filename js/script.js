@@ -88,7 +88,7 @@ $(document).ready(function() {
         move() {
             let next = `#sx${snake.x}y${snake.y}`;
 
-            if(!snake.pause) {
+            if(!snake.pause && !snake.body.some((val) => val === next)) {
                 snake.body.push(next);
                 $(next).css({'opacity' : "0.1"});
 
